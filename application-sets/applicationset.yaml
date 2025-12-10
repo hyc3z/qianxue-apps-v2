@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: qianxue-test-auto-discover
+  namespace: argocd
+spec:
+  generators:
+    - scmProvider:
+        github:
+          organization: qianxue-world
+          api: "https://api.github.com/"
+          tokenRef:
+            secretName: github-token
+            key: token
+          allBranches: true
+          filters:
+            - repositoryMatch: "qianxue-test-*"
+  template:
+    metadata:
+      name: '{{repository}}'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/qianxue-world/{{repository}}.git'
+        targetRevision: HEAD
+        path: k8s/
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{repository}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        retry:
+          limit: 5
+        syncWindow: "*/3 * * * *"
