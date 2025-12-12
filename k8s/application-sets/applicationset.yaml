@@ -16,11 +16,9 @@ spec:
           allBranches: true
         filters:
           - pathsExist:
-              paths:
-                - k8s/
-                - manifests/
-                - manifest/   # 有的人就叫这个
-              # 同时仓库名必须是 qianxue-test- 开头
+              - k8s/
+              - manifests/
+              - manifest/
             repositoryMatch: ^qianxue-test-
   template:
     metadata:
