@@ -20,7 +20,7 @@ spec:
                   - manifests/
                   - manifest/   # 有的人就叫这个
                 # 同时仓库名必须是 qianxue-test- 开头
-              repositoryMatch: ^qianxue-test-
+              repositoryMatch: ^v2-test-
   template:
     metadata:
       name: '{{repository}}'
