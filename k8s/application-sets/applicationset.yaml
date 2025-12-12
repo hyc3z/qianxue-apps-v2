@@ -13,14 +13,14 @@ spec:
             secretName: github-token
             key: token
           allBranches: true
-          filters:
-            - pathsExist:
-                paths:
-                  - k8s/
-                  - manifests/
-                  - manifest/   # 有的人就叫这个
-                # 同时仓库名必须是 qianxue-test- 开头
-              repositoryMatch: ^v2-test-
+        filters:
+          - pathsExist:
+              paths:
+                - k8s/
+                - manifests/
+                - manifest/   # 有的人就叫这个
+              # 同时仓库名必须是 qianxue-test- 开头
+            repositoryMatch: ^qianxue-test-
   template:
     metadata:
       name: '{{repository}}'
