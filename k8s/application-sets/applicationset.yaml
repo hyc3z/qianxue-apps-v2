@@ -4,7 +4,6 @@ metadata:
   name: qianxue-test-auto-discover
   namespace: argocd
 spec:
-  goTemplate: true                 # 必须加！新版 ArgoCD 默认关闭旧模板语法
   generators:
     - scmProvider:
         github:
@@ -20,16 +19,16 @@ spec:
             repositoryMatch: qianxue-test-*
   template:
     metadata:
-      name: '{{.repository.name}}'
+      name: '{{repository}}'
     spec:
       project: default
       source:
-        repoURL: 'https://github.com/qianxue-world/{{.repository.name}}.git'
+        repoURL: 'https://github.com/qianxue-world/{{repository}}.git'
         targetRevision: HEAD
         path: k8s/
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: '{{.repository.name}}'
+        namespace: '{{repository}}'
       syncPolicy:
         automated:
           prune: true
