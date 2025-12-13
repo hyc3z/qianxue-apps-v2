@@ -17,9 +17,7 @@ spec:
         filters:
           - pathsExist:
               - k8s/
-              - manifests/
-              - manifest/
-            repositoryMatch: ^qianxue-test-
+            repositoryMatch: qianxue-test-
   template:
     metadata:
       name: '{{.repository.name}}'
